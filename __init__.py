@@ -10,24 +10,25 @@ import locale
 from albert import *
 from pathlib import Path
 
-md_iid = '2.0'
-md_version = '1.0'
-md_name = 'Time addup'
-md_description = 'Add up time ranges into a floating-point number of hours.'
-md_license = 'MIT'
-md_url = 'https://github.com/kringkaste/albert-time-addup'
+md_iid = "2.0"
+md_version = "1.0"
+md_name = "Time addup"
+md_description = "Add up time ranges into a floating-point number of hours."
+md_license = "MIT"
+md_url = "https://github.com/kringkaste/albert-time-addup"
 
 
 class Plugin(PluginInstance, GlobalQueryHandler):
 
     def __init__(self):
-        GlobalQueryHandler.__init__(self,
-                                    id=md_id,
-                                    name=md_name,
-                                    description=md_description,
-                                    defaultTrigger='t ')
+        GlobalQueryHandler.__init__(
+            self,
+            id=md_id,
+            name=md_name,
+            description=md_description,
+            defaultTrigger="t ",
+        )
         PluginInstance.__init__(self, extensions=[self])
-
 
     def calc(self, string):
         tokens = string.split()
@@ -45,7 +46,7 @@ class Plugin(PluginInstance, GlobalQueryHandler):
                     else:
                         sumTime = sumTime + (int(value) * 60)
                 except:
-                    pass                    
+                    pass
             elif startDate == None:
                 try:
                     startDate = time.strptime(token, "%H:%M")
@@ -63,9 +64,8 @@ class Plugin(PluginInstance, GlobalQueryHandler):
 
         sumTime = sumTime / 60 / 60
         result = locale.format_string("%.2f", sumTime)
-        
-        return result
 
+        return result
 
     def handleGlobalQuery(self, query):
         plugin_dir = Path(__file__).parent
@@ -87,9 +87,8 @@ class Plugin(PluginInstance, GlobalQueryHandler):
                             )
                         ],
                     ),
-                    1
+                    1,
                 )
             )
 
-        
         return rank_items
