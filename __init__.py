@@ -10,7 +10,7 @@ import locale
 from albert import *
 from pathlib import Path
 
-md_iid = "2.0"
+md_iid = "3.0"
 md_version = "1.0"
 md_name = "Time addup"
 md_description = "Add up time ranges into a floating-point number of hours."
@@ -21,14 +21,11 @@ md_url = "https://github.com/kringkaste/albert-time-addup"
 class Plugin(PluginInstance, GlobalQueryHandler):
 
     def __init__(self):
-        GlobalQueryHandler.__init__(
-            self,
-            id=md_id,
-            name=md_name,
-            description=md_description,
-            defaultTrigger="t ",
-        )
-        PluginInstance.__init__(self, extensions=[self])
+        PluginInstance.__init__(self)
+        GlobalQueryHandler.__init__(self)
+
+    def defaultTrigger(self):
+        return 't '
 
     def calc(self, string):
         tokens = string.split()
@@ -92,3 +89,6 @@ class Plugin(PluginInstance, GlobalQueryHandler):
             )
 
         return rank_items
+
+    def configWidget(self):
+        return [{ 'type': 'label', 'text': __doc__.strip() }]
