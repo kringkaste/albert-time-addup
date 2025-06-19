@@ -16,6 +16,7 @@ md_name = "Time addup"
 md_description = "Add up time ranges into a floating-point number of hours."
 md_license = "MIT"
 md_url = "https://github.com/kringkaste/albert-time-addup"
+md_authors = "@kringkaste"
 
 
 class Plugin(PluginInstance, GlobalQueryHandler):
